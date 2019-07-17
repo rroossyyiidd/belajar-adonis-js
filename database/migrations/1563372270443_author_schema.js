@@ -1,12 +1,14 @@
-'use strict'
+'use strict';
 
 /** @type {import('@adonisjs/lucid/src/Schema')} */
-const Schema = use('Schema')
+const Schema = use('Schema');
 
 class AuthorSchema extends Schema {
   up () {
     this.create('authors', (table) => {
-      table.increments()
+      table.increments();
+      table.string('name');
+      table.date('birth_date');
       table.timestamps()
     })
   }
@@ -16,4 +18,4 @@ class AuthorSchema extends Schema {
   }
 }
 
-module.exports = AuthorSchema
+module.exports = AuthorSchema;

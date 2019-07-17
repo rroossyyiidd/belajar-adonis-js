@@ -1,8 +1,15 @@
-'use strict'
+'use strict';
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
+
+// untuk menggunakan model dari book
+const Book = use('App/Models/Book');
+const Author = use('App/Models/Author');
+
+// services
+const BookServices = use('App/Services/BookService');
 
 /**
  * Resourceful controller for interacting with books
@@ -18,6 +25,9 @@ class BookController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    const {rows} = await BookServices.index();
+    const data = {books: rows};
+    return view.render('book.index', data)
   }
 
   /**
@@ -90,4 +100,4 @@ class BookController {
   }
 }
 
-module.exports = BookController
+module.exports = BookController;
